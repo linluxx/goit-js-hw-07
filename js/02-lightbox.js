@@ -5,14 +5,16 @@ const galleryEl = document.querySelector(".gallery");
 galleryItems.forEach((item) =>
   galleryEl.insertAdjacentHTML(
     "beforeend",
-    `<a class="gallery__item" href='${item.original}'>
+    `<li>
+    <a class="gallery__item" href='${item.original}'>
     <img
       class="gallery__image"
       src="${item.preview}"
       data-source="${item.original}"
       alt="${item.description}"
     />
-  </a>`
+  </a>
+  </li>`
   )
 );
 

@@ -25,19 +25,24 @@ function onImageClick(evt) {
   if (evt.target.nodeName !== "IMG") {
     return;
   }
-  const modal = basicLightbox.create(`
-      <img src="${evt.target.dataset.source}">
-  `);
-
-  modal.show();
-  console.log(evt);
-  document.addEventListener("keydown", onEscClose);
+  const modal = basicLightbox.create(
+    `
+      <img src="${evt.target.dataset.source}">`,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", onEscClose);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", onEscClose);
+      },
+    }
+  );
 
   function onEscClose(evt) {
     if (evt.code === "Escape") {
       modal.close();
       console.log(evt);
     }
-    document.removeEventListener("keydown", onEscClose);
   }
+  modal.show();
 }
